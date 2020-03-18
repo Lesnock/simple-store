@@ -9,11 +9,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "dev": "nodemon src/test.js"
+    "dev": "nodemon src/test.js",
+    "build": "babel src -d build"
   },
   "author": "Caio Lesnock <caio.dev@outlook.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",

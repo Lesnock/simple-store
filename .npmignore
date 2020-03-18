@@ -1,7 +1,7 @@
 /node_modules
-/build
+src/test.js
+/src
 
 nodemon.json
-src/test.js
 .eslintrc.js
 .editorconfig
