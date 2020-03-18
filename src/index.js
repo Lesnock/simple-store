@@ -32,7 +32,7 @@ class Store {
  * @param {Function} [effect] - Effect to run when data is updated
  */
   add(name, value, effect) {
-    if (typeof name !== 'string') {
+    if (this.configs.get('allowExistingData') === true && typeof name !== 'string') {
       throw new Error('Name of the store key data should be a string')
     }
 
@@ -62,6 +62,14 @@ class Store {
     }
 
     return this.data.get(name)
+  }
+
+  /**
+   * Verify if a data exists in the store
+   * @param {String} name
+   */
+  has(name) {
+    return this.data.has(name)
   }
 
   /**
