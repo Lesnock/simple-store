@@ -4,7 +4,10 @@ class Store {
   constructor(configs = {}) {
     this.data = new Map()
     this.effects = new Map()
-    this.configs = new Map()
+    this.configs = new Map(Object.entries({
+      persist: false,
+      allowExistingData: false,
+    }))
 
     this.setConfigs(configs)
 
@@ -32,11 +35,11 @@ class Store {
  * @param {Function} [effect] - Effect to run when data is updated
  */
   add(name, value, effect) {
-    if (this.configs.get('allowExistingData') === true && typeof name !== 'string') {
+    if (typeof name !== 'string') {
       throw new Error('Name of the store key data should be a string')
     }
 
-    if (this.data.has(name)) {
+    if (this.configs.get('allowExistingData') === false && this.data.has(name)) {
       throw new Error(`${name} already exists in the store`)
     }
 
