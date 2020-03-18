@@ -1,19 +1,24 @@
 {
-  "name": "simple-store",
+  "name": "@lesnock/simple-store",
   "version": "1.0.0",
-  "description": "A simple state global store",
+  "description": "A reactive store of data for global state management in JS",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lesnock/simple-store"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "dev": "nodemon src/test.js"
   },
   "author": "Caio Lesnock <caio.dev@outlook.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "nodemon": "^2.0.2",
+    "np": "^6.2.0",
     "sucrase": "^3.12.1"
   }
 }
