@@ -21,6 +21,10 @@ class Store {
     Object.keys(configurations).forEach((key) => this.configs.set(key, configurations[key]))
   }
 
+  isRunningOnNode() {
+    return typeof window === 'undefined'
+  }
+
   /**
  * Add some data key to the store
  * @param {String} name - Name of the key for store data
@@ -28,6 +32,10 @@ class Store {
  * @param {Function} [effect] - Effect to run when data is updated
  */
   add(name, value, effect) {
+    if (typeof name !== 'string') {
+      throw new Error('Name of the store key data should be a string')
+    }
+
     if (this.data.has(name)) {
       throw new Error(`${name} already exists in the store`)
     }
@@ -39,9 +47,21 @@ class Store {
     }
 
     // Persist data via localStorage
-    if (this.configs.persist === true) {
+    if (this.configs.persist === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
+  }
+
+  /**
+   * Get some data from store
+   * @param {String} name
+   */
+  get(name) {
+    if (!this.data.has(name)) {
+      return undefined
+    }
+
+    return this.data.get(name)
   }
 
   /**
@@ -61,7 +81,7 @@ class Store {
     this.runEffects(name, value, oldValue)
 
     // Perist data via localStorage
-    if (this.configs.persist === true) {
+    if (this.configs.persist === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
   }
@@ -78,7 +98,7 @@ class Store {
     this.data.delete(name)
 
     // Perist data via localStorage
-    if (this.configs.persist === true) {
+    if (this.configs.persist === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
   }
