@@ -5,7 +5,9 @@ const key = 'simple-store-data'
  * @param {Any} storeData
  */
 export function persistData(storeData) {
-  const dataJSON = JSON.stringify(storeData)
+  const object = Object.fromEntries(storeData)
+
+  const dataJSON = JSON.stringify(object)
   localStorage.setItem(key, dataJSON)
 }
 
@@ -14,7 +16,8 @@ export function persistData(storeData) {
  */
 export function getPersistedData() {
   if (localStorage.getItem(key)) {
-    return JSON.parse(localStorage.getItem(key))
+    const parsedJson = JSON.parse(localStorage.getItem(key))
+    return new Map(Object.entries(parsedJson))
   }
 
   return new Map()
