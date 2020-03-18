@@ -8,7 +8,7 @@ class Store {
 
     this.setConfigs(configs)
 
-    if (this.configs.persist === true) {
+    if (this.configs.get('persist') === true && !this.isRunningOnNode()) {
       this.data = getPersistedData()
     }
   }
@@ -47,7 +47,7 @@ class Store {
     }
 
     // Persist data via localStorage
-    if (this.configs.persist === true && !this.isRunningOnNode()) {
+    if (this.configs.get('persist') === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
   }
@@ -81,7 +81,7 @@ class Store {
     this.runEffects(name, value, oldValue)
 
     // Perist data via localStorage
-    if (this.configs.persist === true && !this.isRunningOnNode()) {
+    if (this.configs.get('persist') === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
   }
@@ -98,7 +98,7 @@ class Store {
     this.data.delete(name)
 
     // Perist data via localStorage
-    if (this.configs.persist === true && !this.isRunningOnNode()) {
+    if (this.configs.get('persist') === true && !this.isRunningOnNode()) {
       persistData(this.data)
     }
   }
