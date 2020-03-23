@@ -1,12 +1,32 @@
 # simple-store
 A reactive store of data for global state management in JS.
 
+- [`Installation`](#installation)
+
+- [`Usage`](#usage)
+  - Methods
+    - [`add`](#add)
+    - [`get`](#get)
+    - [`all`](#all)
+    - [`only`](#only)
+    - [`update`](#update)
+    - [`delete`](#delete)
+    - [`has`](#has)
+  - [`The reactive part`](#the-reactive-part)
+    - [`listen`](#listen)
+  - [`Persisting Data`](#persisting-data)
+  - [`Integration with React`](#using-simple-store-with-react)
+    - [`Class Component`](#class-component)
+    - [`Functional Component`](#functional-component)
+
 ## Installation
 `npm install @lesnock/simple-store`  
 Or  
 `yarn add @lesnock/simple-store`
 
 ## Usage
+
+### Simple Example
 ```javascript
 // storeConfig.js
 import Store from '@lesnock/simple-store';
@@ -36,12 +56,12 @@ store.delete('name')
 store.get('name') // undefined
 ```
 
-To add a new data to the Store use the method **add**. The **add** method accepts two required arguments: 
+#### `add`
+To add a new data to the Store use the method **add**. The **add** method requires two arguments: 
 **name** and **value**.  
 
 If you try to add a data that already exists, Simple Store will throw an exception.  
-This is usefull to help to organize the flow of the app. However, if you want to allow the Simple Store
-to add data that already exists in the store, set the **allowExistingData** to the configs.
+This is usefull to help to organize the flow of the app. However, if you want to allow the Simple Store to add data that already exists in the store, set the **allowExistingData** to the configs.
 ```javascript
 import store from '@lesnock/simple-store'
 
@@ -53,12 +73,54 @@ store.add('name', 'John')
 
 store.add('name', 'Mary') // Will act as a update
 ```
+## Fetching data
+There are different ways of fetching data from the store.
+#### get
+Fetch a specific field from the store:
+```javascript
+const name = store.get('name')
+```
 
-To get some data in the store, just use the **get** method.  
+#### all
+Fetch all data from the store.
+```javascript
+const storeData = store.all()
+
+// Using destructuring assignment
+const { name, age, address } = store.all()
+```
+
+#### only
+Retrieves specifics fields from the store.
+This method will return an object with the required data:
+```javascript
+const data = store.only(['name', 'age', 'address']) 
+// { name: 'John', age: 23, address: 'Lombard Street' }
+
+// Using destructuring assignment
+const { name, age, address } = store.only(['name', 'age', 'address'])
+```
+
+## Updating and Deleting data
 
 You can aswell, update and delete some data in the store using **update** and **delete** methods, respectively.  
 
-To verify if a specific data exists in the store, use the **has** method:
+#### update
+```javascript
+store.add('name', 'John')
+store.update('name', 'Joseph')
+``` 
+
+#### delete
+```javascript
+store.add('name', 'John')
+store.delete('name')
+
+console.log(store.get('name')) // undefined
+``` 
+
+#### has
+Verify if a data exists in the store:
 ```javascript
 store.add('name', 'Bill')
 
@@ -66,23 +128,27 @@ store.has('name') // true
 ```
 
 ## The reactive part
-The **listen** method attachs some callback to a specific data.
-It will listen to data change in the store and once that data changes,
-the callback will be executed.  
+Simple Store is reactive to data change. This means that simple store can detect all data update in your application.  
+It's possible to attach an event to be execute whenever a specific data is updated in the store.
+This is a powerfull tool, since it can be used to globally sincronize all components of your application.
+
+#### listen
+Attachs an event to a specific data in the store. Once the data is updated the callback is executed.
 ```javascript
-// Whenever activeLesson changes in the store, this callback will be executed
+store.add('activeLesson', 1)
+
+// Whenever activeLesson is updated in the store, this callback will be executed
 store.listen('activeLesson', (value, oldValue) => {
   // Logic to change lesson
 }
 ```
 
-If you want to bind an effect to a data when creating it in the store,  
-you could pass a third argument as a callback:
+If you want to set a listener to a data in the store on the moment you are creating it, you could pass a third argument as a callback:
 ```javascript
 store.add('user', 'Gabriel', (value, oldValue) => console.log('user changed'))
 ```
 
-## Persist Data
+## Persisting Data
 
 If you want the data to persist throughout the pages, and refreshes,
 just set the **persist** config to true in the store configs. With this config, Simple Store will
@@ -102,7 +168,7 @@ with the data in the store.
 Simple Store makes this easy.
 
 Look at how to sincronyze and re-render a component, when necessary:  
-Class component:
+##### Class component:
 ```javascript
 import React, { Component } from 'react'
 import store from './storeConfig'
@@ -128,7 +194,7 @@ export default class Name extends Component {
 }
 ```
 
-Functional component:
+##### Functional component:
 ```javascript
 import React, { useState, useEffect } from 'react'
 import store from './storeConfig'
