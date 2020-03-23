@@ -1,6 +1,6 @@
 {
   "name": "@lesnock/simple-store",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A reactive store of data for global state management in JS",
   "main": "build/index.js",
   "repository": {
