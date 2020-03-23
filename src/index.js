@@ -68,6 +68,27 @@ class Store {
   }
 
   /**
+   * Get all data from store
+   */
+  all() {
+    const object = {}
+    this.data.forEach((value, key) => { object[key] = value })
+
+    return object
+  }
+
+  /**
+   * Get specified data from the store
+   */
+  only(data = []) {
+    const filteredObject = {}
+
+    data.forEach((field) => { filteredObject[field] = this.get(field) })
+
+    return filteredObject
+  }
+
+  /**
    * Verify if a data exists in the store
    * @param {String} name
    */
