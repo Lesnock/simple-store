@@ -46,7 +46,7 @@ class Store {
     this.data.set(name, value)
 
     if (effect) {
-      this.bindEffect(name, effect)
+      this.listen(name, effect)
     }
 
     // Persist data via localStorage
@@ -119,7 +119,7 @@ class Store {
  * @param {String} name - Name of the data where the effect will be binded
  * @param {Function} callback - Effect to run when data updated
  */
-  bindEffect(name, callback) {
+  listen(name, callback) {
     if (!this.data.has(name)) {
       throw new Error(`${name} does not exists in the store`)
     }
@@ -130,6 +130,15 @@ class Store {
 
     const currentEffects = this.effects.get(name)
     this.effects.set(name, [...currentEffects, callback])
+  }
+
+  /**
+ * Bind an effect to a data in the store
+ * @param {String} name - Name of the data where the effect will be binded
+ * @param {Function} callback - Effect to run when data updated
+ */
+  bindEffect(name, callback) {
+    this.listen(name, callback)
   }
 
   /**
