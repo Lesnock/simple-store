@@ -20,8 +20,8 @@ import store from './storeConfig'
 
 store.add('name', 'John')
 
-// When "name" change on store, this callback will be executed
-store.bindEffect('name', (value, oldValue) => {
+// When "name" changes in the store, this callback will be executed
+store.listen('name', (value, oldValue) => {
   if (value !== oldValue) {
     console.log(`name changed to ${value}`)
   }
@@ -60,18 +60,18 @@ You can aswell, update and delete some data in the store using **update** and **
 
 To verify if a specific data exists in the store, use the **has** method:
 ```javascript
-store.add('name')
+store.add('name', 'Bill')
 
 store.has('name') // true
 ```
 
 ## The reactive part
-
-The **bindEffect** method attachs some callback to whenever a specific data changes in the store.
-It is basically a listener to a specific data change.
+The **listen** method attachs some callback to a specific data.
+It will listen to data change in the store and once that data changes,
+the callback will be executed.  
 ```javascript
 // Whenever activeLesson changes in the store, this callback will be executed
-store.bindEffect('activeLesson', (value, oldValue) => {
+store.listen('activeLesson', (value, oldValue) => {
   // Logic to change lesson
 }
 ```
@@ -113,7 +113,7 @@ export default class Name extends Component {
   }
 
   componentDidMount() {
-    store.bindEffect('name', name => {
+    store.listen('name', name => {
       this.setState({ name })
     })
   }
@@ -136,7 +136,7 @@ import store from './storeConfig'
 export default function Name() {
   const [name, setName] = useState(store.get('name') || 'Gabriel')
   
-  store.bindEffect('name', value => setName(value))
+  store.listen('name', value => setName(value))
 
   return <span>{name}</span>
 }
