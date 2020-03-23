@@ -168,7 +168,7 @@ with the data in the store.
 Simple Store makes this easy.
 
 Look at how to sincronyze and re-render a component, when necessary:  
-##### Class component:
+#### Class component:
 ```javascript
 import React, { Component } from 'react'
 import store from './storeConfig'
@@ -194,7 +194,7 @@ export default class Name extends Component {
 }
 ```
 
-##### Functional component:
+#### Functional component:
 ```javascript
 import React, { useState, useEffect } from 'react'
 import store from './storeConfig'
