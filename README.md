@@ -4,7 +4,8 @@ A reactive store of data for global state management in JS.
 - [`Installation`](#installation)
 
 - [`Usage`](#usage)
-  - Methods
+- [`Configuration`](#configuration)
+  - API Methods
     - [`add`](#add)
     - [`get`](#get)
     - [`all`](#all)
@@ -28,7 +29,7 @@ Or
 
 ### Simple Example
 ```javascript
-// storeConfig.js
+// store.js
 import Store from '@lesnock/simple-store';
 
 const store = new Store();
@@ -36,7 +37,7 @@ const store = new Store();
 export default store;
 
 // otherfile.js
-import store from './storeConfig'
+import store from './store'
 
 store.add('name', 'John')
 
@@ -56,6 +57,24 @@ store.delete('name')
 store.get('name') // undefined
 ```
 
+### Configuration
+To start using the Simple Store, we should create a file to instantiate and config our store, and export the initial data. 
+This is the unique moment we will import the `@lesnock/simple-store` itself. After config our store, we will import this config file in others files.
+
+```javascript
+// store.js
+import Store from '@lesnock/simple-store';
+
+const store = new Store();
+
+// Add initial data
+store.add('name', 'John');
+store.add('age', 23);
+store.add('address', null);
+
+export default store;
+```
+
 #### `add`
 To add a new data to the Store use the method **add**. The **add** method requires two arguments: 
 **name** and **value**.  
@@ -71,8 +90,11 @@ const store = new Store({
 
 store.add('name', 'John')
 
-store.add('name', 'Mary') // Will act as a update
+store.add('name', 'Mary') // Will overwrite the data
 ```
+
+If you add a data that already exists in the store, it will **NOT** act as a store update, in other words, it will overwirte the data, but it is not going to run the [`effects`](#listen).
+
 ## Fetching data
 There are different ways of fetching data from the store.
 #### get
@@ -160,6 +182,22 @@ const store = new Store({
   persist: true,
 }) 
 ```
+
+It's important to mention that, if you persist the data, when you refresh or change the 
+page in your application, the data will be there yet, so if you try to add that data again, Simple Store will throw an exception (How we have seen above in the [`add section`](#add)).
+This can happen bacause sometimes the scripts runs again when the page is refreshed.
+So when you are persisting data, maybe you should check if a data is already not in the store before add it:
+
+```javascript
+if (!store.has('name')) {
+  store.add('name', 'John')
+}
+
+// OR
+!store.has('name') && store.add('name', 'John')
+```
+The other solution is to add the `allowExistingData` config to the store.
+This config will allow you to add a data that already exists in the store. If you enable this config, you should be carefull, because you can overwrite the persisted data unintentionally.
 
 ## Using Simple Store with React
 Simple Store works well with React, either.  
