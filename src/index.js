@@ -79,11 +79,16 @@ class Store {
 
   /**
    * Get specified data from the store
+   * @param {Array} fields - Fields for get from the store
    */
-  only(data = []) {
+  only(fields = []) {
+    if (!Array.isArray(fields)) {
+      throw new Error('The only method should only receive an array as argument')
+    }
+
     const filteredObject = {}
 
-    data.forEach((field) => { filteredObject[field] = this.get(field) })
+    fields.forEach((field) => { filteredObject[field] = this.get(field) })
 
     return filteredObject
   }
