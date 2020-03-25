@@ -19,6 +19,7 @@ A reactive store of data for global state management in JS.
   - [`Integration with React`](#using-simple-store-with-react)
     - [`Class Component`](#class-component)
     - [`Functional Component`](#functional-component)
+  - [`Tutorials`](#tutorials)
 
 ## Installation
 `npm install @lesnock/simple-store`  
@@ -244,3 +245,8 @@ export default function Name() {
 
   return <span>{name}</span>
 }
+```
+
+## Video Tutorials
+Links to some video tutorials (in brazilian portuguese):
+Simple Store with Vanilla JS: https://www.youtube.com/watch?v=QqtNcFBv6N4
