@@ -248,5 +248,5 @@ export default function Name() {
 ```
 
 ## Video Tutorials
-Links to some video tutorials (in brazilian portuguese):
+Links to some video tutorials (in brazilian portuguese):  
 Simple Store with Vanilla JS: https://www.youtube.com/watch?v=QqtNcFBv6N4
