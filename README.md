@@ -249,4 +249,5 @@ export default function Name() {
 
 ## Video Tutorials
 Links to some video tutorials (in brazilian portuguese):  
-Simple Store with Vanilla JS: https://youtu.be/3Typs7VUbKw
+Simple Store with Vanilla JS: https://youtu.be/3Typs7VUbKw  
+Simple Store with React JS: https://youtu.be/sR2mdmypGkk
