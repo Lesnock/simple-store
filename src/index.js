@@ -183,6 +183,10 @@ class Store {
   }
 }
 
+/**
+ * Create the store and return the instance
+ * @param {Object} configs
+ */
 export default function createStore(configs) {
   return new Store(configs)
 }
