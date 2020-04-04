@@ -183,4 +183,6 @@ class Store {
   }
 }
 
-export default Store
+export default function createStore(configs) {
+  return new Store(configs)
+}

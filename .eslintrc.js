@@ -7,5 +7,6 @@ module.exports = {
     "indent": ["error", 2],
     "semi": "off",
     "class-methods-use-this": "off",
+    "import/no-mutable-exports": "off",
   }
 }
