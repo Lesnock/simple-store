@@ -31,9 +31,9 @@ Or
 ### Simple Example
 ```javascript
 // store.js
-import Store from '@lesnock/simple-store';
+import createStore from '@lesnock/simple-store';
 
-const store = new Store();
+const store = createStore();
 
 export default store;
 
@@ -59,14 +59,14 @@ store.get('name') // undefined
 ```
 
 ### Configuration
-To start using the Simple Store, we should create a file to instantiate and config our store, and export the initial data. 
+To start using the Simple Store, we should create a file to create and config our store, and export the initial data. 
 This is the unique moment we will import the `@lesnock/simple-store` itself. After config our store, we will import this config file in others files.
 
 ```javascript
 // store.js
-import Store from '@lesnock/simple-store';
+import createStore from '@lesnock/simple-store';
 
-const store = new Store();
+const store = createStore();
 
 // Add initial data
 store.add('name', 'John');
@@ -83,9 +83,9 @@ To add a new data to the Store use the method **add**. The **add** method requir
 If you try to add a data that already exists, Simple Store will throw an exception.  
 This is usefull to help to organize the flow of the app. However, if you want to allow the Simple Store to add data that already exists in the store, set the **allowExistingData** to the configs.
 ```javascript
-import store from '@lesnock/simple-store'
+import createStore from '@lesnock/simple-store'
 
-const store = new Store({
+const store = createStore({
   allowExistingData: true,
 })
 
@@ -179,7 +179,7 @@ save the data in the localStorage, and will automatically get from there when th
 or the user change the route. Simple Store state will be the same, regardless of page change.  
 This will **NOT** work in the Node enviroment, just in the browsers.
 ```javascript
-const store = new Store({
+const store = createStore({
   persist: true,
 }) 
 ```
