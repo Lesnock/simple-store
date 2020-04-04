@@ -4,10 +4,11 @@ class Store {
   constructor(configs = {}) {
     this.data = new Map()
     this.effects = new Map()
-    this.configs = new Map(Object.entries({
-      persist: false,
-      allowExistingData: false,
-    }))
+    this.configs = new Map()
+
+    // Initial config
+    this.configs.set('persist', false)
+    this.configs.set('allowExistingData', false)
 
     this.setConfigs(configs)
 
