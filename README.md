@@ -31,9 +31,9 @@ Or
 ### Simple Example
 ```javascript
 // store.js
-import createStore from '@lesnock/simple-store';
+import Store from '@lesnock/simple-store';
 
-const store = createStore();
+const store = new Store();
 
 export default store;
 
