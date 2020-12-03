@@ -93,7 +93,7 @@ class Store {
    * Get specifics data from the store
    * @param fields - Fields to be selected
    */
-  only(fields = []) {
+  only(fields: Array<string | number> = []) {
     if (!Array.isArray(fields)) {
       throw new Error('The only method should only receive an array as argument')
     }
