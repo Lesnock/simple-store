@@ -49,7 +49,7 @@ class Store {
  * @param {Any} value - Initial value of the data
  * @param {Function} [effect] - Effect to run when data is updated
  */
-  add(name: string | number, value: any, effect: (value?: any, oldValue?: any) => void) {
+  add(name: string | number, value: any, effect?: (value?: any, oldValue?: any) => void) {
     if (typeof name !== 'string' && typeof name !== 'number') {
       throw new Error('Name of the store key data should be a string')
     }

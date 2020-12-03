@@ -20,7 +20,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "dev": "nodemon src/index.test.js",
-    "build": "babel src -d build"
+    "build": "tsc"
   },
   "author": "Caio Lesnock <caio.dev@outlook.com>",
   "license": "MIT",
